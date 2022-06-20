@@ -1,0 +1,454 @@
+{
+  "routes": [
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/characters",
+      "summary": "Get all characters",
+      "description": "You can access the list of characters by using the `/characters` endpoint. Pagination is supported via the `?page=2` querystring. You can also filter the results using the `name`, `status`, `species`, `type` and `gender` query parameters. ",
+      "version": "v1",
+      "corsPolicy": "anything-goes",
+      "handler": {
+        "export": "urlRewriteHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rewritePattern": "${env.BASE_URL}/character${search}"
+        }
+      },
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": "Pagination index",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "name",
+          "in": "query",
+          "description": "filter by the given name",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "description": "filter by the status, one of `dead`, `alive` or `unknown`",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "species",
+          "in": "query",
+          "description": "filter by the species",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "description": "filter by the given type",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "gender",
+          "in": "query",
+          "description": " filter by the given gender (female, male, genderless or unknown)",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "$import(./schemas/all-characters.json)"
+              }
+            }
+          }
+        }
+      },
+      "policies": {
+        "inbound": [
+          "replace-characters"
+        ]
+      }
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/characters/:characterId",
+      "summary": "Get a characters by ID(s)",
+      "description": "You can get a single character by ID, or multiple by adding an array of ids as parameter: `/characters/[1,2,3]` or `/characters/1,2,3`",
+      "version": "v1",
+      "corsPolicy": "anything-goes",
+      "handler": {
+        "export": "urlRewriteHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rewritePattern": "${env.BASE_URL}/character/${params.characterId}"
+        }
+      },
+      "parameters": [
+        {
+          "name": "characterId",
+          "in": "path",
+          "description": "A single numeric ID or multiple IDs, e.g. `[1,2,3]` or `1,2`",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "$import(./schemas/single-character.json)"
+              }
+            }
+          },
+          "description": "test"
+        }
+      },
+      "policies": {
+        "inbound": [
+          "replace-characters"
+        ]
+      }
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/locations",
+      "summary": "Get all locations",
+      "description": "You can access the list of locations by using the `/locations` endpoint.",
+      "version": "v1",
+      "corsPolicy": "anything-goes",
+      "handler": {
+        "export": "urlRewriteHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rewritePattern": "${env.BASE_URL}/location${search}"
+        }
+      },
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": "Pagination index",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "name",
+          "in": "query",
+          "description": "filter by the given name",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "description": "filter by the type",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "dimension",
+          "in": "query",
+          "description": "filter by the dimension",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "200 OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "$import(./schemas/all-locations.json)"
+              }
+            }
+          }
+        }
+      },
+      "policies": {
+        "inbound": [
+          "replace-location"
+        ]
+      }
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/locations/:locationId",
+      "summary": "Get locations by ID(s)",
+      "description": "You can get a single location by ID, or multiple by adding an array of ids as parameter: `/locations/[1,2,3]` or `/locations/1,2,3`",
+      "version": "v1",
+      "corsPolicy": "anything-goes",
+      "handler": {
+        "export": "urlRewriteHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rewritePattern": "${env.BASE_URL}/location/${params.locationId}"
+        }
+      },
+      "parameters": [
+        {
+          "name": "locationId",
+          "in": "path",
+          "description": "A single numeric ID or multiple IDs, e.g. `[1,2,3]` or `1,2`",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "200 OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "$import(./schemas/single-location.json)"
+              }
+            }
+          }
+        }
+      },
+      "policies": {
+        "inbound": [
+          "replace-location"
+        ]
+      }
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/episodes/",
+      "summary": "Get all episodes",
+      "description": "You can access the list of episodes by using the `/episodes` endpoint.",
+      "version": "v1",
+      "corsPolicy": "anything-goes",
+      "handler": {
+        "export": "urlRewriteHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rewritePattern": "${env.BASE_URL}/episode${search}"
+        }
+      },
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": "Pagination index",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "name",
+          "in": "query",
+          "description": "filter by the given name",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "episode",
+          "in": "query",
+          "description": "filter by the given episode code",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "200 OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "$import(./schemas/all-episodes.json)"
+              }
+            }
+          }
+        }
+      },
+      "policies": {
+        "inbound": [
+          "replace-episodes"
+        ]
+      }
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/episodes/:episodeId",
+      "summary": "Get episodes by ID(s)",
+      "description": "You can get a single episode by ID, or multiple by adding an array of ids as parameter: `/episodes/[1,2,3]` or `/episodes/1,2,3`",
+      "version": "v1",
+      "corsPolicy": "anything-goes",
+      "handler": {
+        "export": "urlRewriteHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rewritePattern": "${env.BASE_URL}/episode/${params.episodeId}"
+        }
+      },
+      "parameters": [
+        {
+          "name": "episodeId",
+          "in": "path",
+          "description": "A single numeric ID or multiple IDs, e.g. `[1,2,3]` or `1,2`",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "200 OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "$import(./schemas/single-episode.json)"
+              }
+            }
+          }
+        }
+      },
+      "policies": {
+        "inbound": [
+          "replace-episodes"
+        ]
+      }
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/characters/avatar/:imageId",
+      "summary": "Get Avatar",
+      "excludeFromOpenApi": true,
+      "version": "v1",
+      "corsPolicy": "anything-goes",
+      "handler": {
+        "export": "urlRewriteHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rewritePattern": "${env.BASE_URL}/character/avatar/${params.imageId}"
+        }
+      },
+      "policies": {
+        "inbound": []
+      }
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/favicon.ico",
+      "summary": "favicon",
+      "description": "Lorem ipsum dolor sit amet, **consectetur adipiscing** elit, sed do `eiusmod tempor` incididunt ut labore et dolore magna aliqua.",
+      "version": "none",
+      "corsPolicy": "none",
+      "excludeFromOpenApi": true,
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/hello-world)",
+        "options": {}
+      },
+      "policies": {
+        "inbound": []
+      }
+    }
+  ],
+  "versions": [
+    {
+      "name": "none",
+      "pathPrefix": ""
+    },
+    {
+      "name": "v1",
+      "pathPrefix": "/v1",
+      "info": {
+        "title": "The Rick and Morty API (via a Zuplo Gateway)",
+        "description": "An example API proxied via [Zuplo](zuplo.com). The original and upstream API is available at [rickandmortyapi.com](https://rickandmortyapi.com/). The Rick and Morty API is a REST(ish) API based on the television show Rick and Morty. You will have access to about hundreds of characters, images, locations and episodes. The Rick and Morty API is filled with canonical information as seen on the TV show. \n\\\n\\\n![Rick](https://rickandmortyapi.com/api/character/avatar/631.jpeg)",
+        "version": "1.0.0"
+      }
+    }
+  ],
+  "policies": [
+    {
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/replace-policy)",
+        "options": {
+          "regex": "https://rickandmortyapi.com/api/episode",
+          "replace": "https://my-url.com/v1/episodes"
+        }
+      },
+      "name": "replace-episodes",
+      "policyType": "custom-code-inbound"
+    },
+    {
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/replace-policy)",
+        "options": {
+          "regex": "https://rickandmortyapi.com/api/character",
+          "replace": "https://my-url.com/v1/characters"
+        }
+      },
+      "name": "replace-characters",
+      "policyType": "custom-code-inbound"
+    },
+    {
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/replace-policy)",
+        "options": {
+          "regex": "https://rickandmortyapi.com/api/location",
+          "replace": "https://my-url.com/v1/locations"
+        }
+      },
+      "name": "replace-location",
+      "policyType": "custom-code-inbound"
+    },
+    {
+      "handler": {
+        "export": "ClearHeadersInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "exclude": []
+        }
+      },
+      "name": "clear-headers-inbound",
+      "policyType": "clear-headers-inbound"
+    }
+  ]
+}
