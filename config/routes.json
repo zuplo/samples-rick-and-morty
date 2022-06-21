@@ -80,9 +80,7 @@
         }
       },
       "policies": {
-        "inbound": [
-          "replace-characters"
-        ]
+        "inbound": []
       }
     },
     {
@@ -124,9 +122,7 @@
         }
       },
       "policies": {
-        "inbound": [
-          "replace-characters"
-        ]
+        "inbound": []
       }
     },
     {
@@ -193,9 +189,7 @@
         }
       },
       "policies": {
-        "inbound": [
-          "replace-location"
-        ]
+        "inbound": []
       }
     },
     {
@@ -237,9 +231,7 @@
         }
       },
       "policies": {
-        "inbound": [
-          "replace-location"
-        ]
+        "inbound": []
       }
     },
     {
@@ -298,9 +290,7 @@
         }
       },
       "policies": {
-        "inbound": [
-          "replace-episodes"
-        ]
+        "inbound": []
       }
     },
     {
@@ -342,9 +332,7 @@
         }
       },
       "policies": {
-        "inbound": [
-          "replace-episodes"
-        ]
+        "inbound": []
       }
     },
     {
@@ -378,8 +366,28 @@
       "corsPolicy": "none",
       "excludeFromOpenApi": true,
       "handler": {
+        "export": "urlRewriteHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rewritePattern": "https://rickandmortyapi.com/favicon-32x32.png"
+        }
+      },
+      "policies": {
+        "inbound": []
+      }
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/",
+      "summary": "Root redirect",
+      "excludeFromOpenApi": true,
+      "version": "none",
+      "corsPolicy": "none",
+      "handler": {
         "export": "default",
-        "module": "$import(./modules/hello-world)",
+        "module": "$import(./modules/redirect)",
         "options": {}
       },
       "policies": {
@@ -402,53 +410,5 @@
       }
     }
   ],
-  "policies": [
-    {
-      "handler": {
-        "export": "default",
-        "module": "$import(./modules/replace-policy)",
-        "options": {
-          "regex": "https://rickandmortyapi.com/api/episode",
-          "replace": "https://my-url.com/v1/episodes"
-        }
-      },
-      "name": "replace-episodes",
-      "policyType": "custom-code-inbound"
-    },
-    {
-      "handler": {
-        "export": "default",
-        "module": "$import(./modules/replace-policy)",
-        "options": {
-          "regex": "https://rickandmortyapi.com/api/character",
-          "replace": "https://my-url.com/v1/characters"
-        }
-      },
-      "name": "replace-characters",
-      "policyType": "custom-code-inbound"
-    },
-    {
-      "handler": {
-        "export": "default",
-        "module": "$import(./modules/replace-policy)",
-        "options": {
-          "regex": "https://rickandmortyapi.com/api/location",
-          "replace": "https://my-url.com/v1/locations"
-        }
-      },
-      "name": "replace-location",
-      "policyType": "custom-code-inbound"
-    },
-    {
-      "handler": {
-        "export": "ClearHeadersInboundPolicy",
-        "module": "$import(@zuplo/runtime)",
-        "options": {
-          "exclude": []
-        }
-      },
-      "name": "clear-headers-inbound",
-      "policyType": "clear-headers-inbound"
-    }
-  ]
+  "policies": []
 }

@@ -1,10 +1,10 @@
 {
   "environmentVariables": {
-    "CONFIG_1": {
-      "variableType": "config"
-    },
     "TEST": {
       "variableType": "secret"
+    },
+    "BASE_URL": {
+      "variableType": "config"
     }
   }
 }
