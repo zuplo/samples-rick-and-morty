@@ -16,7 +16,7 @@
             "required": [
                 "count",
                 "pages",
-                "next",
+                "next", 
                 "prev"
             ],
             "properties": {

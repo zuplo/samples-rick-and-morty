@@ -1,8 +1,5 @@
 {
   "environmentVariables": {
-    "TEST": {
-      "variableType": "secret"
-    },
     "BASE_URL": {
       "variableType": "config"
     }
