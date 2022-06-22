@@ -1,6 +1,9 @@
 {
   "routes": [
     {
+      "tags": [
+        "Characters"
+      ],
       "methods": [
         "GET"
       ],
@@ -84,6 +87,9 @@
       }
     },
     {
+      "tags": [
+        "Characters"
+      ],
       "methods": [
         "GET"
       ],
@@ -126,6 +132,9 @@
       }
     },
     {
+      "tags": [
+        "Locations"
+      ],
       "methods": [
         "GET"
       ],
@@ -193,6 +202,9 @@
       }
     },
     {
+      "tags": [
+        "Locations"
+      ],
       "methods": [
         "GET"
       ],
@@ -235,6 +247,9 @@
       }
     },
     {
+      "tags": [
+        "Episodes"
+      ],
       "methods": [
         "GET"
       ],
@@ -294,6 +309,9 @@
       }
     },
     {
+      "tags": [
+        "Episodes"
+      ],
       "methods": [
         "GET"
       ],
@@ -403,9 +421,23 @@
     {
       "name": "v1",
       "pathPrefix": "/v1",
+      "tags": [
+        {
+          "name": "Characters",
+          "description": "There are over 800 characters to explore."
+        },
+        {
+          "name": "Locations",
+          "description": "There are over 125 locations to explore."
+        },
+        {
+          "name": "Episodes",
+          "description": "There are over 50 episodes to explore."
+        }
+      ],
       "info": {
         "title": "The Rick and Morty API (via a Zuplo Gateway)",
-        "description": "An example API proxied via [Zuplo](zuplo.com). The original and upstream API is available at [rickandmortyapi.com](https://rickandmortyapi.com/). The Rick and Morty API is a REST(ish) API based on the television show Rick and Morty. You will have access to about hundreds of characters, images, locations and episodes. The Rick and Morty API is filled with canonical information as seen on the TV show. \n\\\n\\\n![Rick](https://rickandmortyapi.com/api/character/avatar/631.jpeg)",
+        "description": "This is an example API proxied via [Zuplo](zuplo.com) - these docs are generated based on the gateway configuration. Full credit to the original and upstream API, which is available at [rickandmortyapi.com](https://rickandmortyapi.com/).\n\\\n\\\n The source for the gateway is available [on GitHub here](https://github.com/zuplo/samples-rick-and-morty). \n\\\n\\\n The Rick and Morty API is a REST(ish) API based on the television show Rick and Morty. You will have access to about hundreds of characters, images, locations and episodes. The Rick and Morty API is filled with canonical information as seen on the TV show. \n\\\n\\\n![Rick](https://rickandmortyapi.com/api/character/avatar/631.jpeg)",
         "version": "1.0.0"
       }
     }
