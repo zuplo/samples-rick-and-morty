@@ -9,7 +9,7 @@
       ],
       "path": "/characters",
       "summary": "Get all characters",
-      "description": "You can access the list of characters by using the `/characters` endpoint. Pagination is supported via the `?page=2` querystring. You can also filter the results using the `name`, `status`, `species`, `type` and `gender` query parameters. ",
+      "description": "You can access the list of characters by using the `/characters` endpoint. Pagination is supported via the `?page=2` querystring. You can also filter the results using the `name`, `status`, `species`, `type` and `gender` query parameters.",
       "version": "v1",
       "corsPolicy": "anything-goes",
       "handler": {
