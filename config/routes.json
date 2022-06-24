@@ -83,7 +83,10 @@
         }
       },
       "policies": {
-        "inbound": []
+        "inbound": [],
+        "outbound": [
+          "replace-urls"
+        ]
       }
     },
     {
@@ -128,7 +131,10 @@
         }
       },
       "policies": {
-        "inbound": []
+        "inbound": [],
+        "outbound": [
+          "replace-urls"
+        ]
       }
     },
     {
@@ -198,7 +204,10 @@
         }
       },
       "policies": {
-        "inbound": []
+        "inbound": [],
+        "outbound": [
+          "replace-urls"
+        ]
       }
     },
     {
@@ -243,7 +252,10 @@
         }
       },
       "policies": {
-        "inbound": []
+        "inbound": [],
+        "outbound": [
+          "replace-urls"
+        ]
       }
     },
     {
@@ -305,7 +317,10 @@
         }
       },
       "policies": {
-        "inbound": []
+        "inbound": [],
+        "outbound": [
+          "replace-urls"
+        ]
       }
     },
     {
@@ -350,7 +365,10 @@
         }
       },
       "policies": {
-        "inbound": []
+        "inbound": [],
+        "outbound": [
+          "replace-urls"
+        ]
       }
     },
     {
@@ -370,7 +388,8 @@
         }
       },
       "policies": {
-        "inbound": []
+        "inbound": [],
+        "outbound": []
       }
     },
     {
@@ -391,7 +410,8 @@
         }
       },
       "policies": {
-        "inbound": []
+        "inbound": [],
+        "outbound": []
       }
     },
     {
@@ -409,7 +429,8 @@
         "options": {}
       },
       "policies": {
-        "inbound": []
+        "inbound": [],
+        "outbound": []
       }
     }
   ],
@@ -442,5 +463,19 @@
       }
     }
   ],
-  "policies": []
+  "policies": [
+    {
+      "name": "replace-urls",
+      "policyType": "custom-code-outbound",
+      "handler": {
+        "export": "ReplaceStringOutboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "mode": "regexp",
+          "match": "https://rickandmortyapi.com/api/(episode|location|character)",
+          "replaceWith": "https://rickandmorty.zuplo.app/v1/$1s"
+        }
+      }
+    }
+  ]
 }
